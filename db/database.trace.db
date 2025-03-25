@@ -1,0 +1,29 @@
+2025-03-24 20:07:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "ID[*] INTEGER AUTO_INCREMENT PRIMARY KEY,
+NAME VARCHAR(255) NOT NULL UNIQUE),
+COMPANY_ID INTEGER NOT NULL,
+CONSTRAINT FK_COMPANY FOREIGN KEY (COMPANY_ID)
+REFERENCES COMPANY(ID)
+ON DELETE SET NULL
+ON UPDATE CASCADE
+"; expected "INSERT"; SQL statement:
+ID INTEGER AUTO_INCREMENT PRIMARY KEY,
+NAME VARCHAR(255) NOT NULL UNIQUE),
+COMPANY_ID INTEGER NOT NULL,
+CONSTRAINT FK_COMPANY FOREIGN KEY (COMPANY_ID)
+REFERENCES COMPANY(ID)
+ON DELETE SET NULL
+ON UPDATE CASCADE
+ [42001-200]
+2025-03-24 21:18:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: No data is available [2000-200]
+2025-03-24 21:21:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: No data is available [2000-200]
+2025-03-24 21:22:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: No data is available [2000-200]
+2025-03-24 21:25:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: No data is available [2000-200]
+2025-03-24 21:29:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: No data is available [2000-200]
+2025-03-24 21:30:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: No data is available [2000-200]

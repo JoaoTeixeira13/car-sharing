@@ -1,0 +1,57 @@
+package carsharing.repository;
+
+import carsharing.client.CompanyDAO;
+import carsharing.model.Company;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CompanyDAORepository implements CompanyDAO {
+
+    public List<Company> getAllCompanies(Database database) {
+        String query = Query.SELECT_ALL.formatted("COMPANY");
+        List<Company> result = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(database.getUrl());
+             Statement statement = connection.createStatement();
+             ResultSet sqlResults = statement.executeQuery(query);
+        ) {
+            while (sqlResults.next()) {
+                int id = sqlResults.getInt("ID");
+                String name = sqlResults.getString("NAME");
+                Company company = new Company(id, name);
+                result.add(company);
+            }
+
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public Company getCompany(int id, Database database) {
+        String query = Query.GET_COMPANY.formatted(id);
+        try (Connection connection = DriverManager.getConnection(database.getUrl());
+             Statement statement = connection.createStatement();
+             ResultSet sqlResults = statement.executeQuery(query);
+        ) {
+            while (sqlResults.next()) {
+                String name = sqlResults.getString("NAME");
+                return new Company(id, name);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void addCompany(String companyName, Database database) {
+
+        String query = Query.INSERT_COMPANY.formatted(companyName);
+        database.executeQuery(query);
+    }
+}
