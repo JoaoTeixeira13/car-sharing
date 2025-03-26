@@ -1,20 +1,19 @@
 package client;
 
 import model.Customer;
-import repository.Database;
 
 import java.util.List;
 
 public interface CustomerDAO {
 
-    List<Customer> getAllCustomers(Database database);
+    List<Customer> getAllCustomers();
 
-    Customer getCustomer(int id, Database database);
+    Customer getCustomer(int id);
 
-    void addCustomer(String customerName, Database database);
+    void addCustomer(String customerName);
 
-    void returnCar(int id, Database database);
+    void returnCar(int id);
 
-    void rentCar(int customerId, int carId, Database database);
+    void rentCar(int customerId, int carId);
 
 }

@@ -23,7 +23,7 @@ public class MenuService {
         this.scanner = new Scanner(System.in);
         this.companyDAORepository = new CompanyDAORepository(database);
         this.carDAORepository = new CarDAORepository(database);
-        this.customerDAORepository = new CustomerDAORepository();
+        this.customerDAORepository = new CustomerDAORepository(database);
     }
 
     public void start() {
@@ -69,7 +69,7 @@ public class MenuService {
 
     private void logInAsCustomer() {
 
-        List<Customer> customers = customerDAORepository.getAllCustomers(database);
+        List<Customer> customers = customerDAORepository.getAllCustomers();
 
         if (customers.isEmpty()) {
             System.out.println("The customer list is empty!");
@@ -94,13 +94,13 @@ public class MenuService {
     private void createCustomer() {
         System.out.println("Enter the customer name:");
         String customerName = scanner.nextLine().trim();
-        customerDAORepository.addCustomer(customerName, database);
+        customerDAORepository.addCustomer(customerName);
         System.out.println("The customer was added!\n");
     }
 
     private void displayCustomer(int customerId) {
 
-        Customer customer = customerDAORepository.getCustomer(customerId, database);
+        Customer customer = customerDAORepository.getCustomer(customerId);
 
         if (customer == null) {
             System.out.printf("No customer found for customerID %d%n", customerId);
@@ -180,7 +180,7 @@ public class MenuService {
     }
 
     public void rentCarToCustomer(Customer customer, Car rentedCar) {
-        customerDAORepository.rentCar(customer.getId(), rentedCar.getId(), database);
+        customerDAORepository.rentCar(customer.getId(), rentedCar.getId());
         customer.setRentedCarId(rentedCar.getId());
         System.out.printf("You rented '%s'%n", rentedCar.getName());
     }
@@ -191,7 +191,7 @@ public class MenuService {
             System.out.println("You didn't rent a car!");
             return;
         }
-        customerDAORepository.returnCar(customer.getId(), database);
+        customerDAORepository.returnCar(customer.getId());
         customer.setRentedCarId(0);
         System.out.println("You've returned a rented car!");
     }

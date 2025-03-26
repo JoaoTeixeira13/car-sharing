@@ -12,7 +12,13 @@ import java.util.List;
 
 public class CustomerDAORepository implements CustomerDAO {
 
-    public List<Customer> getAllCustomers(Database database) {
+    private final Database database;
+
+    public CustomerDAORepository(Database database) {
+        this.database = database;
+    }
+
+    public List<Customer> getAllCustomers() {
         String query = Query.SELECT_ALL.formatted("CUSTOMER");
         List<Customer> result = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(database.getUrl());
@@ -34,7 +40,7 @@ public class CustomerDAORepository implements CustomerDAO {
         return result;
     }
 
-    public Customer getCustomer(int id, Database database) {
+    public Customer getCustomer(int id) {
         String query = Query.GET_CUSTOMER.formatted(id);
         try (Connection connection = DriverManager.getConnection(database.getUrl());
              Statement statement = connection.createStatement();
@@ -52,18 +58,18 @@ public class CustomerDAORepository implements CustomerDAO {
         return null;
     }
 
-    public void addCustomer(String customerName, Database database) {
+    public void addCustomer(String customerName) {
 
         String query = Query.INSERT_CUSTOMER.formatted(customerName);
         database.executeQuery(query);
     }
 
-    public void returnCar(int id, Database database) {
+    public void returnCar(int id) {
         String query = Query.RETURN_CAR.formatted(id);
         database.executeQuery(query);
     }
 
-    public void rentCar(int customerId, int rentedCarId, Database database) {
+    public void rentCar(int customerId, int rentedCarId) {
         String query = Query.RENT_CAR.formatted(rentedCarId, customerId);
         database.executeQuery(query);
     }
