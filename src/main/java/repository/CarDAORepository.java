@@ -12,7 +12,13 @@ import java.util.List;
 
 public class CarDAORepository implements CarDAO {
 
-    public List<Car> getCompanyCars(int companyId, Database database) {
+    private final Database database;
+
+    public CarDAORepository(Database database) {
+        this.database = database;
+    }
+
+    public List<Car> getCompanyCars(int companyId) {
         String query = Query.GET_COMPANY_CARS.formatted(companyId);
         List<Car> result = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(database.getUrl());
@@ -33,7 +39,7 @@ public class CarDAORepository implements CarDAO {
         return result;
     }
 
-    public List<Car> getAvailableCompanyCars(int companyId, Database database) {
+    public List<Car> getAvailableCompanyCars(int companyId) {
         String query = Query.GET_AVAILABLE_COMPANY_CARS.formatted(companyId);
         List<Car> result = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(database.getUrl());
@@ -54,7 +60,7 @@ public class CarDAORepository implements CarDAO {
         return result;
     }
 
-    public Car getCar(int id, Database database) {
+    public Car getCar(int id) {
         String query = Query.GET_CAR.formatted(id);
         try (Connection connection = DriverManager.getConnection(database.getUrl());
              Statement statement = connection.createStatement();
@@ -71,7 +77,7 @@ public class CarDAORepository implements CarDAO {
         return null;
     }
 
-    public void addCarToCompany(String carName, int companyId, Database database) {
+    public void addCarToCompany(String carName, int companyId) {
         String query = Query.INSERT_CAR.formatted(carName, companyId);
         database.executeQuery(query);
     }

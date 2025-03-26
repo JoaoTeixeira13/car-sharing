@@ -22,7 +22,7 @@ public class MenuService {
         this.database = database;
         this.scanner = new Scanner(System.in);
         this.companyDAORepository = new CompanyDAORepository(database);
-        this.carDAORepository = new CarDAORepository();
+        this.carDAORepository = new CarDAORepository(database);
         this.customerDAORepository = new CustomerDAORepository();
     }
 
@@ -159,7 +159,7 @@ public class MenuService {
 
     public void displayCompanyRentals(Company company, Customer customer) {
 
-        List<Car> availableCompanyCars = carDAORepository.getAvailableCompanyCars(company.getId(), database);
+        List<Car> availableCompanyCars = carDAORepository.getAvailableCompanyCars(company.getId());
         if (availableCompanyCars.isEmpty()) {
             System.out.printf("No available cars in the '%s' company. %n", company.getName());
             return;
@@ -203,7 +203,7 @@ public class MenuService {
             return;
         }
 
-        Car carRental = carDAORepository.getCar(rentedCarId, database);
+        Car carRental = carDAORepository.getCar(rentedCarId);
         if (carRental == null) {
             return;
         }
@@ -280,7 +280,7 @@ public class MenuService {
     }
 
     private void displayCompanyCars(int companyId) {
-        List<Car> companyCars = carDAORepository.getCompanyCars(companyId, database);
+        List<Car> companyCars = carDAORepository.getCompanyCars(companyId);
 
         if (companyCars.isEmpty()) {
             System.out.println("The car list is empty!\n");
@@ -312,7 +312,7 @@ public class MenuService {
         System.out.println("Enter the car name:");
         String carName = scanner.nextLine().trim();
 
-        carDAORepository.addCarToCompany(carName, companyId, database);
+        carDAORepository.addCarToCompany(carName, companyId);
         System.out.println("The car was added!");
     }
 
