@@ -30,8 +30,8 @@ public class Query {
             ON UPDATE CASCADE);
             """;
 
-    final static String SELECT_ALL = """
-            SELECT * FROM %s;
+    final static String GET_ALL_COMPANIES = """
+            SELECT * FROM COMPANY;
             """;
 
     final static String GET_COMPANY = """
@@ -74,6 +74,10 @@ public class Query {
     final static String GET_CUSTOMER = """
             SELECT * FROM CUSTOMER
             WHERE ID=%d;
+            """;
+
+    final static String GET_ALL_CUSTOMERS = """
+            SELECT * FROM CUSTOMER;
             """;
 
     final static String RETURN_CAR = """

@@ -3,8 +3,17 @@ package repository;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.logging.Logger;
+
+import static repository.Query.CREATE_COMPANY_TABLE;
+import static repository.Query.CREATE_CAR_TABLE;
+import static repository.Query.CREATE_CUSTOMER_TABLE;
+
 
 public class Database {
+
+    private static final Logger LOGGER = Logger.getLogger(CompanyDAORepository.class.getName());
+
 
     private final String url;
 
@@ -18,9 +27,9 @@ public class Database {
         String name = args.length == 2 ? args[1] : "database";
         url = "jdbc:h2:./src/carsharing/db/" + name;
 
-        executeQuery(Query.CREATE_COMPANY_TABLE);
-        executeQuery(Query.CREATE_CAR_TABLE);
-        executeQuery(Query.CREATE_CUSTOMER_TABLE);
+        executeQuery(CREATE_COMPANY_TABLE);
+        executeQuery(CREATE_CAR_TABLE);
+        executeQuery(CREATE_CUSTOMER_TABLE);
     }
 
     public void executeQuery(String query) {
@@ -31,7 +40,7 @@ public class Database {
             statement.executeUpdate(query);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.severe("Error while executing query: %s".formatted(e.getMessage()));
         }
     }
 

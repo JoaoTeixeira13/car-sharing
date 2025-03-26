@@ -3,14 +3,24 @@ package repository;
 import client.CustomerDAO;
 import model.Customer;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+
+import static repository.Query.GET_ALL_CUSTOMERS;
+import static repository.Query.GET_CUSTOMER;
+import static repository.Query.INSERT_CUSTOMER;
+import static repository.Query.RETURN_CAR;
+import static repository.Query.RENT_CAR;
+
+import static repository.Util.getResultSet;
+
 
 public class CustomerDAORepository implements CustomerDAO {
+
+    private static final Logger LOGGER = Logger.getLogger(CustomerDAO.class.getName());
+
 
     private final Database database;
 
@@ -19,12 +29,8 @@ public class CustomerDAORepository implements CustomerDAO {
     }
 
     public List<Customer> getAllCustomers() {
-        String query = Query.SELECT_ALL.formatted("CUSTOMER");
         List<Customer> result = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(database.getUrl());
-             Statement statement = connection.createStatement();
-             ResultSet sqlResults = statement.executeQuery(query);
-        ) {
+        try (ResultSet sqlResults = getResultSet(GET_ALL_CUSTOMERS, database.getUrl());) {
             while (sqlResults.next()) {
                 int id = sqlResults.getInt("ID");
                 String name = sqlResults.getString("NAME");
@@ -35,17 +41,13 @@ public class CustomerDAORepository implements CustomerDAO {
 
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.severe("Error fetching all customers: %s".formatted(e.getMessage()));
         }
         return result;
     }
 
     public Customer getCustomer(int id) {
-        String query = Query.GET_CUSTOMER.formatted(id);
-        try (Connection connection = DriverManager.getConnection(database.getUrl());
-             Statement statement = connection.createStatement();
-             ResultSet sqlResults = statement.executeQuery(query);
-        ) {
+        try (ResultSet sqlResults = getResultSet(GET_CUSTOMER.formatted(id), database.getUrl());) {
             while (sqlResults.next()) {
                 String name = sqlResults.getString("NAME");
                 int rentedCarId = sqlResults.getInt("RENTED_CAR_ID");
@@ -53,24 +55,20 @@ public class CustomerDAORepository implements CustomerDAO {
                 return new Customer(id, rentedCarId, name);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.severe("Error fetching customer with id '%d': %s".formatted(id, e.getMessage()));
         }
         return null;
     }
 
     public void addCustomer(String customerName) {
-
-        String query = Query.INSERT_CUSTOMER.formatted(customerName);
-        database.executeQuery(query);
+        database.executeQuery(INSERT_CUSTOMER.formatted(customerName));
     }
 
     public void returnCar(int id) {
-        String query = Query.RETURN_CAR.formatted(id);
-        database.executeQuery(query);
+        database.executeQuery(RETURN_CAR.formatted(id));
     }
 
     public void rentCar(int customerId, int rentedCarId) {
-        String query = Query.RENT_CAR.formatted(rentedCarId, customerId);
-        database.executeQuery(query);
+        database.executeQuery(RENT_CAR.formatted(rentedCarId, customerId));
     }
 }
