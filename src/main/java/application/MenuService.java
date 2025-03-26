@@ -1,12 +1,12 @@
-package carsharing.application;
+package application;
 
-import carsharing.model.Car;
-import carsharing.model.Company;
-import carsharing.model.Customer;
-import carsharing.repository.CarDAORepository;
-import carsharing.repository.CompanyDAORepository;
-import carsharing.repository.CustomerDAORepository;
-import carsharing.repository.Database;
+import model.Car;
+import model.Company;
+import model.Customer;
+import repository.CarDAORepository;
+import repository.CompanyDAORepository;
+import repository.CustomerDAORepository;
+import repository.Database;
 
 import java.util.List;
 import java.util.Scanner;

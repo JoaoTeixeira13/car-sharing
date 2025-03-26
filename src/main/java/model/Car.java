@@ -1,4 +1,4 @@
-package carsharing.model;
+package model;
 
 public class Car {
     private final int id;

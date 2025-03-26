@@ -1,7 +1,7 @@
-package carsharing.repository;
+package repository;
 
-import carsharing.client.CarDAO;
-import carsharing.model.Car;
+import client.CarDAO;
+import model.Car;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

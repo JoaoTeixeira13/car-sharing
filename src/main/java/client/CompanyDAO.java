@@ -1,7 +1,7 @@
-package carsharing.client;
+package client;
 
-import carsharing.model.Company;
-import carsharing.repository.Database;
+import model.Company;
+import repository.Database;
 
 import java.util.List;
 

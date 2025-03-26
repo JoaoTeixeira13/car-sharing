@@ -1,6 +1,6 @@
 
-import carsharing.application.MenuService;
-import carsharing.repository.Database;
+import application.MenuService;
+import repository.Database;
 
 
 public class Main {

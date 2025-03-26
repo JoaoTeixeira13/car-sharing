@@ -1,4 +1,4 @@
-package carsharing.repository;
+package repository;
 
 public class Query {
 
