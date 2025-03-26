@@ -12,14 +12,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MenuService {
-    private final Database database;
     private final Scanner scanner;
     private final CompanyDAORepository companyDAORepository;
     private final CarDAORepository carDAORepository;
     private final CustomerDAORepository customerDAORepository;
 
     public MenuService(Database database) {
-        this.database = database;
         this.scanner = new Scanner(System.in);
         this.companyDAORepository = new CompanyDAORepository(database);
         this.carDAORepository = new CarDAORepository(database);
