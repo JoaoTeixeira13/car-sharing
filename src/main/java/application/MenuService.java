@@ -21,7 +21,7 @@ public class MenuService {
     public MenuService(Database database) {
         this.database = database;
         this.scanner = new Scanner(System.in);
-        this.companyDAORepository = new CompanyDAORepository();
+        this.companyDAORepository = new CompanyDAORepository(database);
         this.carDAORepository = new CarDAORepository();
         this.customerDAORepository = new CustomerDAORepository();
     }
@@ -131,7 +131,7 @@ public class MenuService {
 
     private void rentCar(Customer customer) {
 
-        List<Company> companies = companyDAORepository.getAllCompanies(database);
+        List<Company> companies = companyDAORepository.getAllCompanies();
 
         if (companies.isEmpty()) {
             System.out.println("The company list is empty!");
@@ -208,7 +208,7 @@ public class MenuService {
             return;
         }
 
-        Company company = companyDAORepository.getCompany(carRental.getCompanyId(), database);
+        Company company = companyDAORepository.getCompany(carRental.getCompanyId());
         if (company == null) {
             return;
         }
@@ -220,7 +220,7 @@ public class MenuService {
     }
 
     private void displayCompanies() {
-        List<Company> companies = companyDAORepository.getAllCompanies(database);
+        List<Company> companies = companyDAORepository.getAllCompanies();
 
 
         if (companies.isEmpty()) {
@@ -245,7 +245,7 @@ public class MenuService {
 
     private void displayCompany(int companyId) {
 
-        Company company = companyDAORepository.getCompany(companyId, database);
+        Company company = companyDAORepository.getCompany(companyId);
 
         if (company == null) {
             System.out.printf("No company found for companyID %d%n", companyId);
@@ -275,7 +275,7 @@ public class MenuService {
     private void createCompany() {
         System.out.println("Enter the company name:");
         String companyName = scanner.nextLine().trim();
-        companyDAORepository.addCompany(companyName, database);
+        companyDAORepository.addCompany(companyName);
         System.out.println("The company was created!\n");
     }
 

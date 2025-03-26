@@ -12,7 +12,13 @@ import java.util.List;
 
 public class CompanyDAORepository implements CompanyDAO {
 
-    public List<Company> getAllCompanies(Database database) {
+    private final Database database;
+
+    public CompanyDAORepository(Database database) {
+        this.database = database;
+    }
+
+    public List<Company> getAllCompanies() {
         String query = Query.SELECT_ALL.formatted("COMPANY");
         List<Company> result = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(database.getUrl());
@@ -33,7 +39,7 @@ public class CompanyDAORepository implements CompanyDAO {
         return result;
     }
 
-    public Company getCompany(int id, Database database) {
+    public Company getCompany(int id) {
         String query = Query.GET_COMPANY.formatted(id);
         try (Connection connection = DriverManager.getConnection(database.getUrl());
              Statement statement = connection.createStatement();
@@ -49,7 +55,7 @@ public class CompanyDAORepository implements CompanyDAO {
         return null;
     }
 
-    public void addCompany(String companyName, Database database) {
+    public void addCompany(String companyName) {
 
         String query = Query.INSERT_COMPANY.formatted(companyName);
         database.executeQuery(query);

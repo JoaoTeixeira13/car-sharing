@@ -1,16 +1,15 @@
 package client;
 
 import model.Company;
-import repository.Database;
 
 import java.util.List;
 
 public interface CompanyDAO {
 
-    List<Company> getAllCompanies(Database database);
+    List<Company> getAllCompanies();
 
-    Company getCompany(int id, Database database);
+    Company getCompany(int id);
 
-    void addCompany(String companyName, Database database);
+    void addCompany(String companyName);
 }
 
