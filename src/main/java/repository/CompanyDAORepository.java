@@ -33,7 +33,6 @@ public class CompanyDAORepository implements CompanyDAO {
                 Company company = new Company(id, name);
                 result.add(company);
             }
-
             return result;
         } catch (Exception e) {
             LOGGER.severe("Error fetching all companies: %s".formatted(e.getMessage()));

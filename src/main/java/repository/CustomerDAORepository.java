@@ -21,7 +21,6 @@ public class CustomerDAORepository implements CustomerDAO {
 
     private static final Logger LOGGER = Logger.getLogger(CustomerDAO.class.getName());
 
-
     private final Database database;
 
     public CustomerDAORepository(Database database) {
@@ -38,7 +37,6 @@ public class CustomerDAORepository implements CustomerDAO {
                 Customer customer = new Customer(id, rentedCarId, name);
                 result.add(customer);
             }
-
             return result;
         } catch (Exception e) {
             LOGGER.severe("Error fetching all customers: %s".formatted(e.getMessage()));

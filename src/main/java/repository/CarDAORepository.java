@@ -35,7 +35,6 @@ public class CarDAORepository implements CarDAO {
                 Car car = new Car(id, companyId, name);
                 result.add(car);
             }
-
             return result;
         } catch (Exception e) {
             LOGGER.severe("Error fetching cars for company with id '%d': %s".formatted(companyId, e.getMessage()));
@@ -52,7 +51,6 @@ public class CarDAORepository implements CarDAO {
                 Car car = new Car(id, companyId, name);
                 result.add(car);
             }
-
             return result;
         } catch (Exception e) {
             LOGGER.severe("Error fetching available cars for company with id '%d': %s".formatted(companyId, e.getMessage()));

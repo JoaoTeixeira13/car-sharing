@@ -15,5 +15,4 @@ public interface CustomerDAO {
     void returnCar(int id);
 
     void rentCar(int customerId, int carId);
-
 }
