@@ -32,15 +32,13 @@ public class MenuService {
             System.out.println("3. Create a customer");
             System.out.println("0. Exit");
 
-            switch (scanner.nextLine().trim()) {
-                case "" -> System.out.println("No input.");
-                case "1" -> logInAsManager();
-                case "2" -> logInAsCustomer();
-                case "3" -> createCustomer();
-                case "0" -> {
+            switch (validateIntegerInput(scanner.nextLine().trim())) {
+                case 1 -> logInAsManager();
+                case 2 -> logInAsCustomer();
+                case 3 -> createCustomer();
+                case 0 -> {
                     return;
                 }
-                default -> System.out.println("Unknown command!");
             }
         }
 
@@ -52,14 +50,12 @@ public class MenuService {
             System.out.println("2. Create a company");
             System.out.println("0. Back");
 
-            switch (scanner.nextLine().trim()) {
-                case "" -> System.out.println("No input.");
-                case "1" -> displayCompanies();
-                case "2" -> createCompany();
-                case "0" -> {
+            switch (validateIntegerInput(scanner.nextLine().trim())) {
+                case 1 -> displayCompanies();
+                case 2 -> createCompany();
+                case 0 -> {
                     return;
                 }
-                default -> System.out.println("Unknown command!");
             }
 
         }
@@ -282,27 +278,14 @@ public class MenuService {
 
         if (companyCars.isEmpty()) {
             System.out.println("The car list is empty!\n");
-
-            System.out.println("1. Car list");
-            System.out.println("2. Create a car");
-            System.out.println("0. Back");
-
-            int optionInput = validateIntegerInput(scanner.nextLine().trim());
-
-            switch (optionInput) {
-                case 0 -> {
-                    return;
-                }
-                case 1 -> displayCompanyCars(companyId);
-                case 2 -> createCompanyCar(companyId);
-            }
-
-        } else {
-            System.out.println("Car list:");
-            for (Car car : companyCars) {
-                System.out.printf("%d. %s%n", companyCars.indexOf(car) + 1, car.getName());
-            }
+            return;
         }
+
+        System.out.println("Car list:");
+        for (Car car : companyCars) {
+            System.out.printf("%d. %s%n", companyCars.indexOf(car) + 1, car.getName());
+        }
+
 
     }
 
