@@ -11,6 +11,7 @@ import repository.Database;
 import java.util.List;
 import java.util.Scanner;
 
+import static application.Util.displayInfoText;
 import static application.Util.validateIntegerInput;
 
 public class CustomerMenuService {
@@ -59,10 +60,7 @@ public class CustomerMenuService {
             return;
         }
         while (true) {
-            System.out.println("1. Rent a car");
-            System.out.println("2. Return a rented car");
-            System.out.println("3. My rented car");
-            System.out.println("0. Back");
+            displayInfoText(List.of("1. Rent a car", "2. Return a rented car", "3. My rented car", "0. Back"));
             int optionInput = validateIntegerInput(scanner.nextLine().trim());
 
             switch (optionInput) {
@@ -146,9 +144,6 @@ public class CustomerMenuService {
         if (company == null) {
             return;
         }
-        System.out.println("Your rented car:");
-        System.out.println(carRental.getName());
-        System.out.println("Company:");
-        System.out.println(company.getName());
+        displayInfoText(List.of("Your rented car:", carRental.getName(), "Company:", company.getName()));
     }
 }

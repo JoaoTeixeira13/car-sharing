@@ -9,6 +9,7 @@ import repository.Database;
 import java.util.List;
 import java.util.Scanner;
 
+import static application.Util.displayInfoText;
 import static application.Util.validateIntegerInput;
 
 public class ManagerMenuService {
@@ -25,9 +26,7 @@ public class ManagerMenuService {
 
     public void logInAsManager() {
         while (true) {
-            System.out.println("1. Company list");
-            System.out.println("2. Create a company");
-            System.out.println("0. Back");
+            displayInfoText(List.of("1. Company list", "2. Create a company", "0. Back"));
 
             switch (validateIntegerInput(scanner.nextLine().trim())) {
                 case 1 -> displayCompanies();
@@ -73,9 +72,7 @@ public class ManagerMenuService {
         }
         System.out.printf("'%s' company%n", company.getName());
         while (true) {
-            System.out.println("1. Car list");
-            System.out.println("2. Create a car");
-            System.out.println("0. Back");
+            displayInfoText(List.of("1. Car list", "2. Create a car", "0. Back"));
             int optionInput = validateIntegerInput(scanner.nextLine().trim());
 
             switch (optionInput) {

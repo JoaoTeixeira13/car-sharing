@@ -2,8 +2,10 @@ package application;
 
 import repository.Database;
 
+import java.util.List;
 import java.util.Scanner;
 
+import static application.Util.displayInfoText;
 import static application.Util.validateIntegerInput;
 
 public class MenuService {
@@ -20,10 +22,7 @@ public class MenuService {
     public void start() {
 
         while (true) {
-            System.out.println("1. Log in as a manager");
-            System.out.println("2. Log in as a customer");
-            System.out.println("3. Create a customer");
-            System.out.println("0. Exit");
+            displayInfoText(List.of("1. Log in as a manager", "2. Log in as a customer", "3. Create a customer", "0. Exit"));
 
             switch (validateIntegerInput(scanner.nextLine().trim())) {
                 case 1 -> managerMenuService.logInAsManager();

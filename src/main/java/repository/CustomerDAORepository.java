@@ -16,7 +16,6 @@ import static repository.Query.RENT_CAR;
 
 import static repository.Util.getResultSet;
 
-
 public class CustomerDAORepository implements CustomerDAO {
 
     private static final Logger LOGGER = Logger.getLogger(CustomerDAO.class.getName());
