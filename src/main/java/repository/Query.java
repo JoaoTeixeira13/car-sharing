@@ -91,4 +91,12 @@ public class Query {
             SET RENTED_CAR_ID = %d
             WHERE ID=%d;
             """;
+
+    public static final class Column {
+
+        final static String ID = "ID";
+        final static String NAME = "NAME";
+        final static String COMPANY_ID = "COMPANY_ID";
+        final static String RENTED_CAR_ID = "RENTED_CAR_ID";
+    }
 }

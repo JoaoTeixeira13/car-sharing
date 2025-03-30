@@ -64,12 +64,12 @@ public class CustomerMenuService {
             int optionInput = validateIntegerInput(scanner.nextLine().trim());
 
             switch (optionInput) {
-                case 0 -> {
-                    return;
-                }
                 case 1 -> rentCar(customer);
                 case 2 -> returnCarRental(customer);
                 case 3 -> displayRentalInfo(customer.getRentedCarId());
+                case 0 -> {
+                    return;
+                }
             }
         }
     }

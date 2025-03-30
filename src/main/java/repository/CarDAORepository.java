@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static repository.Query.Column.ID;
+import static repository.Query.Column.NAME;
+import static repository.Query.Column.COMPANY_ID;
+
 import static repository.Query.GET_COMPANY_CARS;
 import static repository.Query.GET_AVAILABLE_COMPANY_CARS;
 import static repository.Query.GET_CAR;
@@ -30,8 +34,8 @@ public class CarDAORepository implements CarDAO {
         List<Car> result = new ArrayList<>();
         try (ResultSet sqlResults = getResultSet(GET_COMPANY_CARS.formatted(companyId), database.getUrl())) {
             while (sqlResults.next()) {
-                int id = sqlResults.getInt("ID");
-                String name = sqlResults.getString("NAME");
+                int id = sqlResults.getInt(ID);
+                String name = sqlResults.getString(NAME);
                 Car car = new Car(id, companyId, name);
                 result.add(car);
             }
@@ -46,8 +50,8 @@ public class CarDAORepository implements CarDAO {
         List<Car> result = new ArrayList<>();
         try (ResultSet sqlResults = getResultSet(GET_AVAILABLE_COMPANY_CARS.formatted(companyId), database.getUrl())) {
             while (sqlResults.next()) {
-                int id = sqlResults.getInt("ID");
-                String name = sqlResults.getString("NAME");
+                int id = sqlResults.getInt(ID);
+                String name = sqlResults.getString(NAME);
                 Car car = new Car(id, companyId, name);
                 result.add(car);
             }
@@ -61,8 +65,8 @@ public class CarDAORepository implements CarDAO {
     public Car getCar(int id) {
         try (ResultSet sqlResults = getResultSet(GET_CAR.formatted(id), database.getUrl())) {
             while (sqlResults.next()) {
-                int companyId = sqlResults.getInt("COMPANY_ID");
-                String name = sqlResults.getString("NAME");
+                int companyId = sqlResults.getInt(COMPANY_ID);
+                String name = sqlResults.getString(NAME);
                 return new Car(id, companyId, name);
             }
         } catch (Exception e) {

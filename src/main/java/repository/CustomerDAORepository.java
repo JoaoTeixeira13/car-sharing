@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static repository.Query.Column.ID;
+import static repository.Query.Column.NAME;
+import static repository.Query.Column.RENTED_CAR_ID;
+
 import static repository.Query.GET_ALL_CUSTOMERS;
 import static repository.Query.GET_CUSTOMER;
 import static repository.Query.INSERT_CUSTOMER;
@@ -30,9 +34,9 @@ public class CustomerDAORepository implements CustomerDAO {
         List<Customer> result = new ArrayList<>();
         try (ResultSet sqlResults = getResultSet(GET_ALL_CUSTOMERS, database.getUrl());) {
             while (sqlResults.next()) {
-                int id = sqlResults.getInt("ID");
-                String name = sqlResults.getString("NAME");
-                int rentedCarId = sqlResults.getInt("RENTED_CAR_ID");
+                int id = sqlResults.getInt(ID);
+                String name = sqlResults.getString(NAME);
+                int rentedCarId = sqlResults.getInt(RENTED_CAR_ID);
                 Customer customer = new Customer(id, rentedCarId, name);
                 result.add(customer);
             }
@@ -46,8 +50,8 @@ public class CustomerDAORepository implements CustomerDAO {
     public Customer getCustomer(int id) {
         try (ResultSet sqlResults = getResultSet(GET_CUSTOMER.formatted(id), database.getUrl());) {
             while (sqlResults.next()) {
-                String name = sqlResults.getString("NAME");
-                int rentedCarId = sqlResults.getInt("RENTED_CAR_ID");
+                String name = sqlResults.getString(NAME);
+                int rentedCarId = sqlResults.getInt(RENTED_CAR_ID);
 
                 return new Customer(id, rentedCarId, name);
             }

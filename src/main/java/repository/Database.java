@@ -23,7 +23,7 @@ public class Database {
             System.out.println(e.getMessage());
         }
         String name = args.length == 2 ? args[1] : "database";
-        url = "jdbc:h2:./src/carsharing/db/" + name;
+        url = "jdbc:h2:./src/carsharing/db/%s".formatted(name);
         executeQuery(CREATE_COMPANY_TABLE);
         executeQuery(CREATE_CAR_TABLE);
         executeQuery(CREATE_CUSTOMER_TABLE);

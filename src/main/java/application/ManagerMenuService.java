@@ -76,11 +76,11 @@ public class ManagerMenuService {
             int optionInput = validateIntegerInput(scanner.nextLine().trim());
 
             switch (optionInput) {
+                case 1 -> displayCompanyCars(companyId);
+                case 2 -> createCompanyCar(companyId);
                 case 0 -> {
                     return;
                 }
-                case 1 -> displayCompanyCars(companyId);
-                case 2 -> createCompanyCar(companyId);
             }
         }
     }
